@@ -3,7 +3,7 @@ import math
 import numpy as np
 import matplotlib.pyplot as plt
 
-from hypotrochoid import Hypotrochoid
+from hypytrochoid import Hypotrochoid
 
 R = 200
 r = 122.5
