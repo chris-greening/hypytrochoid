@@ -10,11 +10,14 @@ class Hypotrochoid:
     
         self.x = [calculate_x(R, r, d, theta) for theta in self.thetas]
         self.y = [calculate_y(R, r, d, theta) for theta in self.thetas]
+        self.coords = list(zip(self.x, self.y))
 
     def trace(self) -> None:
         """Turtle draw the hypotrochoid"""
         screen = turtle.Screen()
         screen.setup(1000,1000)
+        for x, y in self.coords:
+            turtle.goto(x, y)
 
 def calculate_x(R: float, r: float, d: float, theta: float) -> float:
     """Return calculated x-value from parametrized equation"""
@@ -23,4 +26,3 @@ def calculate_x(R: float, r: float, d: float, theta: float) -> float:
 def calculate_y(R: float, r: float, d: float, theta: float) -> float:
     """Return calculated y-value from parametrized equation"""
     return (R - r)*math.sin(theta) + d*math.sin(((R-r)/r)*theta)
-
