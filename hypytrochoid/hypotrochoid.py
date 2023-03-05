@@ -1,5 +1,6 @@
 import math
 import turtle
+from typing import Tuple
 
 class Hypotrochoid:
     """Model of a hypotrochoid"""
@@ -13,10 +14,10 @@ class Hypotrochoid:
         self.y = [calculate_y(R, r, d, theta) for theta in self.thetas]
         self.coords = list(zip(self.x, self.y))
 
-    def trace(self, speed: int = 0, ) -> None:
+    def trace(self, speed: int = 0, screen_size: Tuple[int, int] = (1000, 1000)) -> None:
         """Turtle draw the hypotrochoid"""
         screen = turtle.Screen()
-        screen.setup(1000,1000)
+        screen.setup(*screen_size)
         turtle.speed(speed)
         
         first = True 
