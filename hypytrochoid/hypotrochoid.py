@@ -1,4 +1,5 @@
 import math
+import turtle
 
 class Hypotrochoid:
     """Model of a hypotrochoid"""

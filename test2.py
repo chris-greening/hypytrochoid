@@ -8,10 +8,14 @@ from hypytrochoid import Hypotrochoid
 R = 200
 d = 300
 thetas = np.arange(0,360, .005)
+r = 142.5
 
-for i, r in enumerate(np.arange(142, 143.2, .005)):
-    r = round(r, 3)
-    hypotrochoid = Hypotrochoid(R, r, d, thetas)
-    plt.clf()
-    plt.plot(hypotrochoid.x, hypotrochoid.y, linewidth=.2)
-    plt.savefig(f"test/test{i}.png")
+# for i, r in enumerate(np.arange(142, 143.2, .005)):
+#     r = round(r, 3)
+#     hypotrochoid = Hypotrochoid(R, r, d, thetas)
+#     plt.clf()
+#     plt.plot(hypotrochoid.x, hypotrochoid.y, linewidth=.2)
+#     plt.savefig(f"test/test{i}.png")
+
+hypotrochoid = Hypotrochoid(R, r, d, thetas)
+hypotrochoid.trace()
