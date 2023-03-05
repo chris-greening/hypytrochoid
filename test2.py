@@ -8,5 +8,5 @@ thetas = np.arange(0,360, .2)
 r = 142
 
 hypotrochoid = Hypotrochoid(R, r, d, thetas)
-hypotrochoid.trace()
+hypotrochoid.trace(exit_on_click=True, speed = 1)
 

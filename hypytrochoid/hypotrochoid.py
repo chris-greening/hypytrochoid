@@ -1,6 +1,7 @@
 import math
 import turtle
 from typing import Tuple
+import time
 
 class Hypotrochoid:
     """Model of a hypotrochoid"""
@@ -12,7 +13,7 @@ class Hypotrochoid:
     
         self.x = [calculate_x(R, r, d, theta) for theta in self.thetas]
         self.y = [calculate_y(R, r, d, theta) for theta in self.thetas]
-        self.coords = list(zip(self.x, self.y))
+        self.coords = list(zip(self.x, self.y, self.thetas))
 
     def trace(self, speed: int = 0, screen_size: Tuple[int, int] = (1000, 1000), exit_on_click: bool = False, color: str = "black", hide_turtle: bool = True) -> None:
         """Turtle draw the hypotrochoid"""
@@ -23,25 +24,65 @@ class Hypotrochoid:
         turtle.tracer(False)
         if hide_turtle:
             turtle.hideturtle()
+        t3 = turtle.Turtle()
+        t3.hideturtle()
+        t3.speed(0)
+        t3.pensize(2)
+        t3.up()
+        t3.seth(0)
+        t3.goto(0,-self.R)
+        t3.down()
+        t3.circle(self.R,steps=200)
+
 
         shape_turtle = turtle.Turtle()
-        shape_turtle.speed(0)
+        shape_turtle.speed(1)
         small_circle_turtle = turtle.Turtle()
-        small_circle_turtle.speed(0)
+        small_circle_turtle.speed(1)
+        small_circle_turtle.hideturtle()
+
         first = True 
         shape_turtle.up()
-        for x, y in self.coords:
+        for x, y, theta in self.coords:
+            time.sleep(.1)
             shape_turtle.goto(x, y)
 
             small_circle_turtle.clear()
             small_circle_turtle.up()
-            small_circle_turtle.goto(x, y-self.r)
+            small_circle_y=(self.R - self.r)*math.sin(theta) - self.r
+            small_circle_x=(self.R - self.r)*math.cos(theta)
+            small_circle_turtle.goto(small_circle_x, small_circle_y)
             small_circle_turtle.down()
-            small_circle_turtle.color('black')
-            small_circle_turtle.circle(self.r, steps=200)
+            small_circle_turtle.color("black")
+            small_circle_turtle.circle(self.r,steps=200)
 
-            # dist = -self.r*angle
+            # dist = -self.r*theta*math.pi/180
             # big_radian = dist/self.R
+
+            # small_circle_turtle.seth(0)
+            # small_circle_turtle.clear()
+            # small_circle_turtle.up()
+            # small_circle_turtle.goto(x, y)
+            # small_circle_turtle.down()
+            # small_circle_turtle.dot(10,'red')
+            # small_circle_turtle.seth(theta)
+            # small_circle_turtle.color("purple")
+            # small_circle_turtle.bk(self.d)
+            # small_circle_turtle.color("black")
+            # small_circle_turtle.circle(self.r,steps=200)
+
+
+
+            # turtle.clear()
+            # turtle.up()
+            # turtle.seth(0)
+            # turtle.goto(x,y-self.r)
+            # turtle.down()
+            # turtle.color('black')
+            # turtle.up()
+            # turtle.goto(x,y)
+            # turtle.dot(10,'blue')
+            # turtle.down()
 
             if first:
                 first = False
