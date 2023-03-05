@@ -27,7 +27,7 @@ class Hypotrochoid:
             if first:
                 first = False
                 turtle.down()
-        if exitonclick:
+        if exit_on_click:
             turtle.exitonclick()
 
 def calculate_x(R: float, r: float, d: float, theta: float) -> float:
