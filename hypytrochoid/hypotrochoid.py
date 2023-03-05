@@ -23,13 +23,14 @@ class Hypotrochoid:
         if hide_turtle:
             turtle.hideturtle()
 
+        shape_turtle = turtle.Turtle()
         first = True 
-        turtle.up()
+        shape_turtle.up()
         for x, y in self.coords:
-            turtle.goto(x, y)
+            shape_turtle.goto(x, y)
             if first:
                 first = False
-                turtle.down()
+                shape_turtle.down()
         if exit_on_click:
             turtle.exitonclick()
 
