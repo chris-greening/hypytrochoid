@@ -20,17 +20,33 @@ class Hypotrochoid:
         screen.setup(*screen_size)
         turtle.speed(speed)
         turtle.color(color)
+        turtle.tracer(False)
         if hide_turtle:
             turtle.hideturtle()
 
         shape_turtle = turtle.Turtle()
+        shape_turtle.speed(0)
+        small_circle_turtle = turtle.Turtle()
+        small_circle_turtle.speed(0)
         first = True 
         shape_turtle.up()
         for x, y in self.coords:
             shape_turtle.goto(x, y)
+
+            small_circle_turtle.clear()
+            small_circle_turtle.up()
+            small_circle_turtle.goto(x, y-self.r)
+            small_circle_turtle.down()
+            small_circle_turtle.color('black')
+            small_circle_turtle.circle(self.r, steps=200)
+
+            # dist = -self.r*angle
+            # big_radian = dist/self.R
+
             if first:
                 first = False
                 shape_turtle.down()
+            turtle.update()
         if exit_on_click:
             turtle.exitonclick()
 
