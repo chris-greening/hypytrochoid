@@ -15,75 +15,61 @@ class Hypotrochoid:
         self.y = [calculate_y(R, r, d, theta) for theta in self.thetas]
         self.coords = list(zip(self.x, self.y, self.thetas))
 
-    def trace(self, speed: int = 0, screen_size: Tuple[int, int] = (1000, 1000), exit_on_click: bool = False, color: str = "black", hide_turtle: bool = True) -> None:
+    def trace(self, speed: int = 0, screen_size: Tuple[int, int] = (1000, 1000), exit_on_click: bool = False, color: str = "black", hide_turtle: bool = True, show_circles: bool = False) -> None:
         """Turtle draw the hypotrochoid"""
         screen = turtle.Screen()
         screen.setup(*screen_size)
-        turtle.speed(speed)
-        turtle.color(color)
         turtle.tracer(False)
-        if hide_turtle:
-            turtle.hideturtle()
-        t3 = turtle.Turtle()
-        t3.hideturtle()
-        t3.speed(0)
-        t3.pensize(2)
-        t3.up()
-        t3.seth(0)
-        t3.goto(0,-self.R)
-        t3.down()
-        t3.circle(self.R,steps=200)
-
 
         shape_turtle = turtle.Turtle()
-        shape_turtle.speed(1)
         small_circle_turtle = turtle.Turtle()
-        small_circle_turtle.speed(1)
+        large_circle_turtle = turtle.Turtle()
         small_circle_turtle.hideturtle()
+        large_circle_turtle.hideturtle()
+        if hide_turtle:
+            shape_turtle.hideturtle()
 
+        if show_circles:
+            large_circle_turtle.up()
+            large_circle_turtle.seth(0)
+            large_circle_turtle.goto(0,-self.R)
+            large_circle_turtle.down()
+            large_circle_turtle.circle(self.R,steps=200)
+        
         first = True 
         shape_turtle.up()
         for x, y, theta in self.coords:
-            time.sleep(.1)
             shape_turtle.goto(x, y)
 
-            small_circle_turtle.clear()
-            small_circle_turtle.up()
-            small_circle_y=(self.R - self.r)*math.sin(theta) - self.r
-            small_circle_x=(self.R - self.r)*math.cos(theta)
-            small_circle_turtle.goto(small_circle_x, small_circle_y)
-            small_circle_turtle.down()
-            small_circle_turtle.color("black")
-            small_circle_turtle.circle(self.r,steps=200)
+            # Draw small circle
+            if show_circles:
+                # Reset 
+                small_circle_turtle.clear()
+                small_circle_turtle.seth(0)
+                small_circle_turtle.up()
 
-            # dist = -self.r*theta*math.pi/180
-            # big_radian = dist/self.R
+                # Draw red dot 
+                small_circle_turtle.goto(x, y)
+                small_circle_turtle.dot(10, "red")
 
-            # small_circle_turtle.seth(0)
-            # small_circle_turtle.clear()
-            # small_circle_turtle.up()
-            # small_circle_turtle.goto(x, y)
-            # small_circle_turtle.down()
-            # small_circle_turtle.dot(10,'red')
-            # small_circle_turtle.seth(theta)
-            # small_circle_turtle.color("purple")
-            # small_circle_turtle.bk(self.d)
-            # small_circle_turtle.color("black")
-            # small_circle_turtle.circle(self.r,steps=200)
+                # Draw circle
+                small_circle_turtle.seth(0)
+                small_circle_y=(self.R - self.r)*math.sin(theta) - self.r
+                small_circle_x=(self.R - self.r)*math.cos(theta)
+                small_circle_turtle.goto(small_circle_x, small_circle_y)
+                small_circle_turtle.down()
+                small_circle_turtle.color("black")
+                small_circle_turtle.circle(self.r,steps=200)
 
+                # Draw center blue dot
+                small_circle_turtle.up()
+                small_circle_turtle.goto(small_circle_x, small_circle_y + self.r)
+                small_circle_turtle.dot(10, "blue")
 
-
-            # turtle.clear()
-            # turtle.up()
-            # turtle.seth(0)
-            # turtle.goto(x,y-self.r)
-            # turtle.down()
-            # turtle.color('black')
-            # turtle.up()
-            # turtle.goto(x,y)
-            # turtle.dot(10,'blue')
-            # turtle.down()
-
+                #Draw line
+                small_circle_turtle.down()
+                small_circle_turtle.seth(small_circle_turtle.towards(shape_turtle))
+                small_circle_turtle.fd(self.d)
             if first:
                 first = False
                 shape_turtle.down()

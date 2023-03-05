@@ -2,11 +2,16 @@ import numpy as np
 
 from hypytrochoid import Hypotrochoid
 
-R = 200
-d = 300
-thetas = np.arange(0,360, .2)
-r = 142
+# R = 573/2
+# d = 600/2
+# thetas = np.arange(0,365, .2)
+# r = 791/2
+
+R = 600/1.2
+d = 400/1.2
+thetas = np.arange(0,365,2)
+r = d
 
 hypotrochoid = Hypotrochoid(R, r, d, thetas)
-hypotrochoid.trace(exit_on_click=True, speed = 1)
+hypotrochoid.trace(exit_on_click=True, speed = 1, show_circles=True)
 
