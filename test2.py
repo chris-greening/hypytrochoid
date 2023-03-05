@@ -18,4 +18,4 @@ r = 142
 #     plt.savefig(f"test/test{i}.png")
 
 hypotrochoid = Hypotrochoid(R, r, d, thetas)
-hypotrochoid.trace()
+hypotrochoid.trace(exitonclick=True)
