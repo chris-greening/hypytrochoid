@@ -7,8 +7,8 @@ from hypytrochoid import Hypotrochoid
 
 R = 200
 d = 300
-thetas = np.arange(0,360, .005)
-r = 142.5
+thetas = np.arange(0,360, .2)
+r = 142
 
 # for i, r in enumerate(np.arange(142, 143.2, .005)):
 #     r = round(r, 3)
